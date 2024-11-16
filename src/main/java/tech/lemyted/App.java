@@ -1,13 +1,31 @@
 package tech.lemyted;
 
-/**
- * Hello world!
- *
- */
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import tech.lemyted.converter.DecimalConverterU32;
+
+@SpringBootApplication
+@RestController
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        SpringApplication.run(App.class, args);
+    }
+    
+    @GetMapping("/bin-to-dec-u32")
+    public int convertBinToDec(@RequestParam String binStr) 
+    {
+    	return DecimalConverterU32.convert(binStr);
+    }
+    
+    @GetMapping("/dec-to-bin-u32")
+    public String convertDecToBin(@RequestParam int decNum) 
+    {
+    	return DecimalConverterU32.toBinary(decNum);
     }
 }
