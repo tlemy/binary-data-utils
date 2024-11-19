@@ -3,9 +3,7 @@ pipeline {
   stages {
     stage('Compile') {
       steps {
-        sh '''git pull
-mvn compile
-'''
+        sh 'mvn compile'
       }
     }
 
