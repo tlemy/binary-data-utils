@@ -1,15 +1,19 @@
 package tech.lemyted.converter;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DecimalConverterU32Test 
 {
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void whenStrIsInvalid_convert_throwsIllegalArgumentException() 
 	{
-		DecimalConverterU32.convert(null);
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			DecimalConverterU32.convert(null);
+		});
+		assertEquals("The input is not a valid binary string", exception.getMessage());
 	}
 	
 	@Test
