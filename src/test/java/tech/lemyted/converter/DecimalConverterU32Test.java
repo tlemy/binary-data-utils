@@ -8,10 +8,19 @@ import org.junit.jupiter.api.Test;
 public class DecimalConverterU32Test 
 {
 	@Test
-	public void whenStrIsInvalid_convert_throwsIllegalArgumentException() 
+	public void whenStrIsInvalid_convert_throwsIllegalArgumentException_case1() 
 	{
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
 			DecimalConverterU32.convert(null);
+		});
+		assertEquals("The input is not a valid binary string", exception.getMessage());
+	}
+	
+	@Test
+	public void whenStrIsInvalid_convert_throwsIllegalArgumentException_case2()
+	{
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			DecimalConverterU32.convert("");
 		});
 		assertEquals("The input is not a valid binary string", exception.getMessage());
 	}
@@ -47,9 +56,15 @@ public class DecimalConverterU32Test
 	}
 	
 	@Test
-	public void whenStrHasMoreThanBits_convert_returnsValidAnswer() 
+	public void whenStrHasMoreThan32Bits_convert_returnsValidAnswer() 
 	{
 		assertEquals(921528955, DecimalConverterU32.convert("000110110111011010110101001111011"));
+	}
+	
+	@Test
+	public void whenStrHasMostSignificantBitOn_convert_returnsValidAnswer() 
+	{
+		assertEquals(Integer.MAX_VALUE, DecimalConverterU32.convert("10000000000000000000000000000001"));
 	}
 	
 	@Test
@@ -80,5 +95,17 @@ public class DecimalConverterU32Test
 	public void whenIntIsValid_toBinary_returnsCorrectString_case5()
 	{
 		assertEquals("00110110111011010110101001111011", DecimalConverterU32.toBinary(921528955));
+	}
+	
+	@Test
+	public void whenIntIsMax_toBinary_returnsCorrectString()
+	{
+		assertEquals("01111111111111111111111111111111", DecimalConverterU32.toBinary(Integer.MAX_VALUE));
+	}
+	
+	@Test
+	public void whenIntIsTooBig_toBinary_returnsTruncatedAnswer()
+	{
+		assertEquals("00000000000000000000000000000000", DecimalConverterU32.toBinary(Integer.MAX_VALUE + 1));
 	}
 }

@@ -1,5 +1,6 @@
 package tech.lemyted.converter;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -82,5 +83,35 @@ public class ConverterTest
 	{
 		assertFalse(Converter.isValid(null));
 		
+	}
+	
+	@Test
+	public void whenNBitsIsNegative_pad_isNotPadded()
+	{
+		assertEquals("00", Converter.pad("00", -1));
+	}
+	
+	@Test
+	public void whenNBitsIsZero_pad_isNotPadded()
+	{
+		assertEquals("001", Converter.pad("001", 0));
+	}
+	
+	@Test
+	public void whenStrHasLessThanNBits_pad_isPadded()
+	{
+		assertEquals("00000000000000000000000000010101", Converter.pad("10101", 32));
+	}
+	
+	@Test
+	public void whenStrHasNBits_pad_isNotPadded()
+	{
+		assertEquals("10000000000000000000000000000001", Converter.pad("10000000000000000000000000000001", 32));
+	}
+	
+	@Test
+	public void whenStrHasMoreThanNBits_pad_isNotPadded()
+	{
+		assertEquals("10000000000000000000000000000011", Converter.pad("10000000000000000000000000000011", 32));
 	}
 }
