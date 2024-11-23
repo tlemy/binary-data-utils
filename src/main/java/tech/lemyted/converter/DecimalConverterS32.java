@@ -4,6 +4,15 @@ public class DecimalConverterS32 extends Converter
 {
 	private static final int N_BITS = 32;
 	
+	private static final long MAX_VALUE = (long) (Math.pow(2, N_BITS) - 1);
+	
+	/**
+	 * Converts 32-bit signed integers from binary to decimal.
+	 * If the string has more than 32 bits, it will be truncated.
+	 * @param str is the binary string to be converted
+	 * @return int as result
+	 * @throws IllegalArgumentException if str is not valid
+	 * */
 	public static long convert(String str)
 	{	
 		if (!isValid(str)) 
@@ -22,35 +31,22 @@ public class DecimalConverterS32 extends Converter
 		return pos - neg;
 	}
 	
+	/**
+	 * Converts integer from decimal to signed 32-bit binary.
+	 * TODO If the integer is bigger than Long.MAX_VALUE, it will be truncated.
+	 * @param num is the integer to convert
+	 * @return String as a result
+	 * */
 	public static String toBinary(long num) 
 	{
-		String result = "";
-		
-		if (num < 0) 
-		{
-			result += "1";
-			num -= Math.pow(2, N_BITS - 1);
-		}
-		else 
+		if (num >= 0) 
 		{
 			return DecimalConverterU32.toBinary(num);
 		}
 		
-		for (int i = N_BITS - 2; i >= 0; i--)
-		{
-			long toAdd = (long) Math.pow(2, i);
-			long rem = num + toAdd;
-			
-			if (rem <= 0) 
-			{
-				result += "1";
-				num = rem;
-			}
-			else 
-			{
-				result += "0";
-			}
-		}
+		num += (long) (Math.pow(2, N_BITS - 1));
+		String result = DecimalConverterU32.toBinary(num);
+		result = result.replaceFirst("0", "1");
 		
 		return result;
 	}
