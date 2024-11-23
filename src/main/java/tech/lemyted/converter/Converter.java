@@ -31,11 +31,26 @@ public class Converter
 	 * @param nBits is the number of characters to reach
 	 * @return str with more zeros if applicable
 	 */
-	public static String pad(String str, int nBits) 
+	public static String padLeft(String str, int nBits) 
 	{
 		while(str.length() < nBits) 
 		{
 			str = "0" + str;
+		}
+		return str;
+	}
+	
+	/**
+	 * Pads binary strings with zeros at the start until the string is n chars long
+	 * @param str is the binary string
+	 * @param nBits is the number of characters to reach
+	 * @return str with more zeros if applicable
+	 */
+	public static String padRight(String str, int nBits) 
+	{
+		while(str.length() < nBits) 
+		{
+			str += "0";
 		}
 		return str;
 	}

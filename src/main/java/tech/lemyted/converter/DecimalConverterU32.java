@@ -11,21 +11,21 @@ public class DecimalConverterU32 extends Converter
 	 * @return int as result
 	 * @throws IllegalArgumentException if str is not valid
 	 * */
-	public static int convert(String str) 
+	public static long convert(String str) 
 	{
 		if (!isValid(str)) 
 		{
 			throw new IllegalArgumentException("The input is not a valid binary string");
 		}
 		
-		str = pad(str, N_BITS);
+		str = padLeft(str, N_BITS);
 		
-		int tot = 0;
+		long tot = 0;
+		int indexFirst = str.length() - N_BITS;
 		int indexLast = str.length() - 1;
 		
-		for (int i = indexLast; i >= 0; i--) 
+		for (int i = indexLast; i >= indexFirst; i--) 
 		{
-			
 			if (str.charAt(i) == '1') 
 			{
 				tot += Math.pow(2, indexLast - i);
@@ -35,12 +35,12 @@ public class DecimalConverterU32 extends Converter
 	}
 	
 	/**
-	 * Converts integer from decimal to 32-bit binary.
-	 * If the integer is bigger than Integer.MAX_VALUE, it will be truncated.
+	 * Converts integer from decimal to unsigned 32-bit binary.
+	 * TODO If the integer is bigger than Long.MAX_VALUE, it will be truncated.
 	 * @param num is the integer to convert
 	 * @return String as a result
 	 * */
-	public static String toBinary(int num) 
+	public static String toBinary(long num) 
 	{
 		String str = "";
 		

@@ -62,50 +62,68 @@ public class DecimalConverterU32Test
 	}
 	
 	@Test
-	public void whenStrHasMostSignificantBitOn_convert_returnsValidAnswer() 
+	public void whenStr31BitsOn_convert_returnsIntegerMaxValue() 
 	{
-		assertEquals(Integer.MAX_VALUE, DecimalConverterU32.convert("10000000000000000000000000000001"));
+		assertEquals(Integer.MAX_VALUE, DecimalConverterU32.convert("01111111111111111111111111111111"));
 	}
 	
 	@Test
-	public void whenIntIsValid_toBinary_returnsCorrectString_case1()
+	public void whenStrHas32BitsOn_convert_returnsValidAnswer() 
+	{
+		assertEquals(Math.pow(2, 32) - 1, DecimalConverterU32.convert("11111111111111111111111111111111"));
+	}
+	
+	@Test
+	public void whenStrHas33BitsOn_convert_returnsTruncatedAnswer() 
+	{
+		assertEquals(Math.pow(2, 32) - 1, DecimalConverterU32.convert("111111111111111111111111111111111"));
+	}
+	
+	@Test
+	public void whenNumIsValid_toBinary_returnsCorrectString_case1()
 	{
 		assertEquals("00000000000000000000000000000000", DecimalConverterU32.toBinary(0));
 	}
 	
 	@Test
-	public void whenIntIsValid_toBinary_returnsCorrectString_case2()
+	public void whenNumIsValid_toBinary_returnsCorrectString_case2()
 	{
 		assertEquals("00000000000000000000000000000001", DecimalConverterU32.toBinary(1));
 	}
 	
 	@Test
-	public void whenIntIsValid_toBinary_returnsCorrectString_case3()
+	public void whenNumIsValid_toBinary_returnsCorrectString_case3()
 	{
 		assertEquals("00000000000000000000000000001111", DecimalConverterU32.toBinary(15));
 	}
 	
 	@Test
-	public void whenIntIsValid_toBinary_returnsCorrectString_case4()
+	public void whenNumIsValid_toBinary_returnsCorrectString_case4()
 	{
 		assertEquals("00000000000000000001111010110101", DecimalConverterU32.toBinary(7861));
 	}
 	
 	@Test
-	public void whenIntIsValid_toBinary_returnsCorrectString_case5()
+	public void whenNumIsValid_toBinary_returnsCorrectString_case5()
 	{
 		assertEquals("00110110111011010110101001111011", DecimalConverterU32.toBinary(921528955));
 	}
 	
 	@Test
-	public void whenIntIsMax_toBinary_returnsCorrectString()
+	public void whenNumIsIntegerMaxValue_toBinary_returnsCorrectString()
 	{
 		assertEquals("01111111111111111111111111111111", DecimalConverterU32.toBinary(Integer.MAX_VALUE));
 	}
 	
 	@Test
-	public void whenIntIsTooBig_toBinary_returnsTruncatedAnswer()
+	public void whenNumIsFull32BitsInteger_toBinary_returns32BitsOn()
 	{
-		assertEquals("00000000000000000000000000000000", DecimalConverterU32.toBinary(Integer.MAX_VALUE + 1));
+		assertEquals("11111111111111111111111111111111", DecimalConverterU32.toBinary((long) Math.pow(2, 32) - 1));
+	}
+	
+	@Test
+	public void whenNumIsBiggerThanFull32BitsInteger_toBinary_returnsTruncatedResult()
+	{
+		assertEquals("11111111111111111111111111111111", DecimalConverterU32.toBinary(Long.MAX_VALUE));
 	}
 }
