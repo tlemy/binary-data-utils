@@ -18,13 +18,13 @@ public class App
     }
     
     @GetMapping("/bin-to-dec-u32")
-    public int convertBinToDec(@RequestParam String binStr) 
+    public long convertBinToDec(@RequestParam String binStr) 
     {
     	return DecimalConverterU32.convert(binStr);
     }
     
     @GetMapping("/dec-to-bin-u32")
-    public String convertDecToBin(@RequestParam int decNum) 
+    public String convertDecToBin(@RequestParam long decNum) 
     {
     	return DecimalConverterU32.toBinary(decNum);
     }
