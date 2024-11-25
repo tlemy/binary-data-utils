@@ -7,7 +7,7 @@ pipeline {
     stages {
 	stage('Setup') {
 		steps {
-			sh 'export JENKINS_HOME=${user.home}/Applications/jenkins' 
+			sh 'export JENKINS_HOME=${HOME}/Applications/jenkins' 
 		}
 	}
     	stage('Build') {
