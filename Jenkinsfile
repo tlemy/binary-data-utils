@@ -1,26 +1,10 @@
 pipeline { 
     agent any 
     stages {
-    	stage('Compile') {
+    	stage('Build') {
     		steps {
-    			sh 'mvn compile'
+    			sh 'mvn clean install'
     		}
     	}
-        stage('Test') { 
-            steps { 
-                sh 'mvn test' 
-            }
-        }
-        stage('Install'){
-            steps {
-                sh 'mvn install'
-                junit 'reports/**/*.xml' 
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'echo deploy'
-            }
-        }
     }
 }
