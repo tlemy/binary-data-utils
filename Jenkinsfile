@@ -7,7 +7,7 @@ pipeline {
     stages {
 	stage('Setup') {
 		steps {
-			sh 'export MAVEN_HOME=/usr/share/maven' 
+			sh 'export MAVEN_HOME=/usr/share/maven'
 		}
 	}
     	stage('Build') {
@@ -23,6 +23,13 @@ pipeline {
 			always {
 				junit 'target/surefire-reports/*.xml'
 			}
+		}
+	}
+	stage('Deploy') {
+		steps {
+			sh 'mkdir /opt/binary-data-utils'
+			sh 'cp ./target/binary-data-utils.jar /opt/binary-data-utils'
+			sh './deploy.sh'
 		}
 	}
     }
