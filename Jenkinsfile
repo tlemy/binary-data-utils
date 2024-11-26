@@ -1,5 +1,5 @@
 pipeline { 
-    agent ted_agent
+    agent { label 'ted_agent'}
     tools {
 	maven 'Maven 3.8.8'
 	jdk 'Java 21.0.5'
