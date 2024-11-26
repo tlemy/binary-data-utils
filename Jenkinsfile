@@ -1,5 +1,5 @@
 pipeline { 
-    agent { label 'ted_agent'}
+    agent any
     tools {
 	maven 'Maven 3.8.8'
 	jdk 'Java 21.0.5'
@@ -27,9 +27,11 @@ pipeline {
 	}
 	stage('Deploy') {
 		steps {
-			sh 'mkdir -p /opt/binary-data-utils'
+			sh 'mkdir /opt/binary-data-utils'
 			sh 'cp ./target/binary-data-utils.jar /opt/binary-data-utils'
-			sh './deploy.sh'
+			sh 'docker build -t binary-data-utils .'
+			sh 'docker images'
+			sh 'docker run binary-data-utils'
 		}
 	}
     }
