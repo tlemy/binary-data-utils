@@ -1,5 +1,5 @@
 pipeline { 
-    agent any
+    agent { label 'ted_agent_1' }
     tools {
 	maven 'Maven 3.8.8'
 	jdk 'Java 21.0.5'
@@ -27,6 +27,7 @@ pipeline {
 	}
 	stage('Deploy') {
 		steps {
+			sh 'whoami'
 			sh 'mkdir /opt/binary-data-utils'
 			sh 'cp ./target/binary-data-utils.jar /opt/binary-data-utils'
 			sh 'docker build -t binary-data-utils .'
