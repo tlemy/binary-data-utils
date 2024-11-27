@@ -27,8 +27,6 @@ pipeline {
 	}
 	stage('Deploy') {
 		steps {
-			sh 'whoami'
-			sh 'mkdir /opt/binary-data-utils'
 			sh 'cp ./target/binary-data-utils.jar /opt/binary-data-utils'
 			sh 'docker build -t binary-data-utils .'
 			sh 'docker images'
