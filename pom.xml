@@ -64,6 +64,13 @@
 	      <artifactId>maven-jar-plugin</artifactId>
 	      	<configuration>
                 	<finalName>${project.artifactId}</finalName>
+			<archive>
+				<manifest>
+					<mainClass>
+						tech.lemyted.App
+					</mainClass>
+				</manifest>
+			</archive>
             	</configuration>
 	    </plugin>
 	    <plugin>

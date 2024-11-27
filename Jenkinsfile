@@ -27,10 +27,7 @@ pipeline {
 	}
 	stage('Deploy') {
 		steps {
-			sh 'cp ./target/binary-data-utils.jar /opt/binary-data-utils'
-			sh 'docker build -t binary-data-utils .'
-			sh 'docker images'
-			sh 'docker run binary-data-utils'
+			sh './deploy.sh'
 		}
 	}
     }
