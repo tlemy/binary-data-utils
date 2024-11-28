@@ -24,7 +24,7 @@ pipeline {
 		steps {
 			sh 'docker build -t binary-data-utils .'
 			sh 'docker images'
-			sh 'docker run binary-data-utils &'
+			sh 'docker run -d -p 8081:8081 binary-data-utils'
 		}
 	}
     }
