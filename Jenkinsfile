@@ -5,11 +5,11 @@ pipeline {
 	jdk 'Java 21.0.5'
     }
     stages {
-    	stage('Build') {
-    		steps {
-    			sh 'mvn clean package -DskipTests=true'
-    		}
-    	}
+	stage('Build') {
+		steps {
+			sh 'mvn clean package -DskipTests=true'
+		}
+	}
 	stage('Test') {
 		steps {
 			sh 'mvn test'
@@ -17,6 +17,15 @@ pipeline {
 		post {
 			always {
 				junit 'target/surefire-reports/*.xml'
+			}
+		}
+	}
+	stage('Clean') {
+		steps {
+			catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+				sh 'docker stop $(docker ps -a -q  --filter ancestor=binary-data-utils)'
+				sh 'docker rm $(docker ps -a -q  --filter ancestor=binary-data-utils)'
+				sh 'docker rmi $(docker images -a -q  --filter reference=binary-data-utils)'
 			}
 		}
 	}
