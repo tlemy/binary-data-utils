@@ -22,7 +22,9 @@ pipeline {
 	}
 	stage('Deploy') {
 		steps {
-			sh './deploy.sh'
+			sh 'docker build -t binary-data-utils .'
+			sh 'docker images'
+			sh 'docker run binary-data-utils'
 		}
 	}
     }
