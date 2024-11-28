@@ -1,4 +1,5 @@
-FROM openjdk:21-rc-jdk-oraclelinux7 
+FROM openjdk:21-rc-jdk-oraclelinux7
+USER root 
 WORKDIR /home/ted/Applications/binary-data-utils
 COPY ./target/binary-data-utils.jar /home/ted/Applications/binary-data-utils
 RUN chmod +x /home/ted/Applications/binary-data-utils/binary-data-utils.jar

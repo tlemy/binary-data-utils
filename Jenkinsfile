@@ -5,11 +5,6 @@ pipeline {
 	jdk 'Java 21.0.5'
     }
     stages {
-	stage('Setup') {
-		steps {
-			sh 'export MAVEN_HOME=/usr/share/maven'
-		}
-	}
     	stage('Build') {
     		steps {
     			sh 'mvn clean package -DskipTests=true'
