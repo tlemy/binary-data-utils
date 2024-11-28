@@ -24,7 +24,6 @@ pipeline {
 		steps {
 			sh 'docker build -t binary-data-utils .'
 			sh 'docker images'
-			sh 'docker rm $(docker stop $(docker ps -a -q --filter ancestor=binary-data-utils --format="{{.ID}}"))'
 			sh 'docker run -d -p 8081:8081 binary-data-utils'
 		}
 	}
