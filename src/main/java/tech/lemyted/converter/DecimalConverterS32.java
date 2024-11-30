@@ -13,7 +13,7 @@ public class DecimalConverterS32 extends Converter
 	 * @return int as result
 	 * @throws IllegalArgumentException if str is not valid
 	 * */
-	public static long convert(String str)
+	public static long toDecimal(String str)
 	{	
 		if (!isValid(str)) 
 		{
@@ -25,8 +25,8 @@ public class DecimalConverterS32 extends Converter
 		
 		String negativeWeight = String.valueOf(str.charAt(0));
 		String positiveWeight = str.substring(1);
-		long neg = DecimalConverterU32.convert(padRight(negativeWeight, N_BITS));
-		long pos = DecimalConverterU32.convert(padLeft(positiveWeight, N_BITS));
+		long neg = DecimalConverterU32.toDecimal(padRight(negativeWeight, N_BITS));
+		long pos = DecimalConverterU32.toDecimal(padLeft(positiveWeight, N_BITS));
 		
 		return pos - neg;
 	}

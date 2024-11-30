@@ -11,7 +11,7 @@ public class DecimalConverterS32Test
 	public void whenStrIsInvalid_convert_throwsIllegalArgumentException()
 	{
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			DecimalConverterS32.convert(null);
+			DecimalConverterS32.toDecimal(null);
 		});
 		assertEquals("The input is not a valid binary string", exception.getMessage());
 	}
@@ -19,49 +19,49 @@ public class DecimalConverterS32Test
 	@Test
 	public void whenStrIsValid_convert_returnsValidAnswer_case1() 
 	{
-		assertEquals(0, DecimalConverterS32.convert("0"));
+		assertEquals(0, DecimalConverterS32.toDecimal("0"));
 	}
 	
 	@Test
 	public void whenStrIsValid_convert_returnsValidAnswer_case2() 
 	{
-		assertEquals(1, DecimalConverterS32.convert("1"));
+		assertEquals(1, DecimalConverterS32.toDecimal("1"));
 	}
 	
 	@Test
 	public void whenStrIsValid_convert_returnsValidAnswer_case3() 
 	{
-		assertEquals(0, DecimalConverterS32.convert("000"));
+		assertEquals(0, DecimalConverterS32.toDecimal("000"));
 	}
 	
 	@Test
 	public void whenStrIsValid_convert_returnsValidAnswer_case4() 
 	{
-		assertEquals(15, DecimalConverterS32.convert("1111"));
+		assertEquals(15, DecimalConverterS32.toDecimal("1111"));
 	}
 	
 	@Test
 	public void whenStrIsValid_convert_returnsValidAnswer_case5() 
 	{
-		assertEquals(7861, DecimalConverterS32.convert("1111010110101"));
+		assertEquals(7861, DecimalConverterS32.toDecimal("1111010110101"));
 	}
 	
 	@Test
 	public void whenStrHasMoreThanBits_convert_returnsValidAnswer() 
 	{
-		assertEquals(921528955, DecimalConverterS32.convert("000110110111011010110101001111011"));
+		assertEquals(921528955, DecimalConverterS32.toDecimal("000110110111011010110101001111011"));
 	}
 	
 	@Test
 	public void whenWhenStrHasNegativeWithtFlag_convert_returnsValidAnswer()
 	{
-		assertEquals(-1, DecimalConverterS32.convert("11111111111111111111111111111111"));
+		assertEquals(-1, DecimalConverterS32.toDecimal("11111111111111111111111111111111"));
 	}
 	
 	@Test
 	public void whenWhenStrHas33BitsOn_convert_returnsTruncatedAnswer()
 	{
-		assertEquals(-1, DecimalConverterS32.convert("111111111111111111111111111111111"));
+		assertEquals(-1, DecimalConverterS32.toDecimal("111111111111111111111111111111111"));
 	}
 	
 	@Test
@@ -98,5 +98,11 @@ public class DecimalConverterS32Test
 	public void whenWhenNumHasNegativeWithtFlag_toBinary_returnsValidAnswer()
 	{
 		assertEquals("11111111111111111111111111111111", DecimalConverterS32.toBinary(-1));
+	}
+	
+	@Test
+	void whenNegativeNum_convert_throwsIllegalArgumentException() 
+	{
+	    assertThrows(IllegalArgumentException.class, () -> RomanConverter.toRoman(-1));
 	}
 }

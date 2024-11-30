@@ -11,7 +11,7 @@ public class DecimalConverterU32 extends Converter
 	 * @return int as result
 	 * @throws IllegalArgumentException if str is not valid
 	 * */
-	public static long convert(String str) 
+	public static long toDecimal(String str) 
 	{
 		if (!isValid(str)) 
 		{

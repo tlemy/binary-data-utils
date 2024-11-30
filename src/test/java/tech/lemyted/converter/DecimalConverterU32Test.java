@@ -11,7 +11,7 @@ public class DecimalConverterU32Test
 	public void whenStrIsInvalid_convert_throwsIllegalArgumentException_case1() 
 	{
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			DecimalConverterU32.convert(null);
+			DecimalConverterU32.toDecimal(null);
 		});
 		assertEquals("The input is not a valid binary string", exception.getMessage());
 	}
@@ -20,7 +20,7 @@ public class DecimalConverterU32Test
 	public void whenStrIsInvalid_convert_throwsIllegalArgumentException_case2()
 	{
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			DecimalConverterU32.convert("");
+			DecimalConverterU32.toDecimal("");
 		});
 		assertEquals("The input is not a valid binary string", exception.getMessage());
 	}
@@ -28,55 +28,55 @@ public class DecimalConverterU32Test
 	@Test
 	public void whenStrIsValid_convert_returnsValidAnswer_case1() 
 	{
-		assertEquals(0, DecimalConverterU32.convert("0"));
+		assertEquals(0, DecimalConverterU32.toDecimal("0"));
 	}
 	
 	@Test
 	public void whenStrIsValid_convert_returnsValidAnswer_case2() 
 	{
-		assertEquals(1, DecimalConverterU32.convert("1"));
+		assertEquals(1, DecimalConverterU32.toDecimal("1"));
 	}
 	
 	@Test
 	public void whenStrIsValid_convert_returnsValidAnswer_case3() 
 	{
-		assertEquals(0, DecimalConverterU32.convert("000"));
+		assertEquals(0, DecimalConverterU32.toDecimal("000"));
 	}
 	
 	@Test
 	public void whenStrIsValid_convert_returnsValidAnswer_case4() 
 	{
-		assertEquals(15, DecimalConverterU32.convert("1111"));
+		assertEquals(15, DecimalConverterU32.toDecimal("1111"));
 	}
 	
 	@Test
 	public void whenStrIsValid_convert_returnsValidAnswer_case5() 
 	{
-		assertEquals(7861, DecimalConverterU32.convert("1111010110101"));
+		assertEquals(7861, DecimalConverterU32.toDecimal("1111010110101"));
 	}
 	
 	@Test
 	public void whenStrHasMoreThan32Bits_convert_returnsValidAnswer() 
 	{
-		assertEquals(921528955, DecimalConverterU32.convert("000110110111011010110101001111011"));
+		assertEquals(921528955, DecimalConverterU32.toDecimal("000110110111011010110101001111011"));
 	}
 	
 	@Test
 	public void whenStr31BitsOn_convert_returnsIntegerMaxValue() 
 	{
-		assertEquals(Integer.MAX_VALUE, DecimalConverterU32.convert("01111111111111111111111111111111"));
+		assertEquals(Integer.MAX_VALUE, DecimalConverterU32.toDecimal("01111111111111111111111111111111"));
 	}
 	
 	@Test
 	public void whenStrHas32BitsOn_convert_returnsValidAnswer() 
 	{
-		assertEquals(Math.pow(2, 32) - 1, DecimalConverterU32.convert("11111111111111111111111111111111"));
+		assertEquals(Math.pow(2, 32) - 1, DecimalConverterU32.toDecimal("11111111111111111111111111111111"));
 	}
 	
 	@Test
 	public void whenStrHas33BitsOn_convert_returnsTruncatedAnswer() 
 	{
-		assertEquals(Math.pow(2, 32) - 1, DecimalConverterU32.convert("111111111111111111111111111111111"));
+		assertEquals(Math.pow(2, 32) - 1, DecimalConverterU32.toDecimal("111111111111111111111111111111111"));
 	}
 	
 	@Test
