@@ -22,38 +22,38 @@ public class App
     }
     
     @GetMapping("/bin-to-dec-u32")
-    public long convertBinToDecU(@RequestParam String binStr) 
+    public long convertBinToDecU(@RequestParam String target) 
     {
-    	return DecimalConverterU32.toDecimal(binStr);
+    	return DecimalConverterU32.toDecimal(target);
     }
     
     @GetMapping("/dec-to-bin-u32")
-    public String convertDecToBinU(@RequestParam long decNum)
+    public String convertDecToBinU(@RequestParam long target)
     {
-    	return DecimalConverterU32.toBinary(decNum);
+    	return DecimalConverterU32.toBinary(target);
     }
     
     @GetMapping("/bin-to-dec-s32")
-    public long convertBinToDecS(@RequestParam String binStr) 
+    public long convertBinToDecS(@RequestParam String target) 
     {
-    	return DecimalConverterS32.toDecimal(binStr);
+    	return DecimalConverterS32.toDecimal(target);
     }
     
     @GetMapping("/dec-to-bin-s32")
-    public String convertDecToBinS(@RequestParam long decNum) 
+    public String convertDecToBinS(@RequestParam long target) 
     {
-    	return DecimalConverterS32.toBinary(decNum);
+    	return DecimalConverterS32.toBinary(target);
     }
     
-//    @GetMapping("rom-to-dec")
-//    public int convertRomToDec(@RequestParam String romStr)
-//    {
-//    	
-//    }
+    @GetMapping("rom-to-dec")
+    public int convertRomToDec(@RequestParam String target)
+    {
+    	return RomanConverter.toDecimal(target);
+    }
     
     @GetMapping("dec-to-rom")
-    public String convertDecToRom(@RequestParam int decNum)
+    public String convertDecToRom(@RequestParam int target)
     {
-    	return RomanConverter.toRoman(decNum);
+    	return RomanConverter.toRoman(target);
     }
 }

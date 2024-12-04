@@ -101,8 +101,12 @@ public class DecimalConverterS32Test
 	}
 	
 	@Test
-	void whenNegativeNum_convert_throwsIllegalArgumentException() 
+	void whenBiggerThanMaxNum_toBinary_throwsIllegalArgumentException()
 	{
-	    assertThrows(IllegalArgumentException.class, () -> RomanConverter.toRoman(-1));
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+			DecimalConverterS32.toBinary(DecimalConverterS32.MAX_VALUE + 1);
+		});
+		String expectedMsg = String.format("The number provided is bigger than %d", DecimalConverterS32.MAX_VALUE);
+		assertEquals(expectedMsg, exception.getMessage());
 	}
 }

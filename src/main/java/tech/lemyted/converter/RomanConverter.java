@@ -1,5 +1,6 @@
 package tech.lemyted.converter;
 
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -35,18 +36,56 @@ public class RomanConverter
 	{	
 		if (target <= 0)
 		{
-			throw new IllegalArgumentException("Number cannot be smaller or equall to 0");
+			throw new IllegalArgumentException("The number cannot be smaller or equall to 0");
 		}
 		
 		if (target >= 4000)
 		{
-			throw new IllegalArgumentException("Number cannot be bigger or equal to 4000");
+			throw new IllegalArgumentException("The number cannot be bigger or equal to 4000");
 		}
 		
 		int remaining = target % 1000;
 		int thousands = target - remaining;
 		
 		return createRomanString(thousands) + createRomanString(remaining);
+	}
+	
+	/**
+	 * Converts string from roman numeral to decimal notation
+	 * @param target is string to convert
+	 * @return integer as a result
+	 * */
+	public static int toDecimal(String target) 
+	{
+		int total = 0;
+		
+		for (int i = 0; i < target.length(); i++)
+		{
+			String letter = String.format("%c", target.charAt(i));
+			int num = ROMAN_LETTERS.get(letter);
+			
+			if (i < target.length() - 1) 
+			{
+				String nextLetter = String.format("%c", target.charAt(i + 1));
+				int nextNum = ROMAN_LETTERS.get(nextLetter);
+				
+				if (num < nextNum) 
+				{
+					total += nextNum - num;
+					i++;
+				}
+				else 
+				{
+					total += num;
+				}
+			}
+			else 
+			{
+				total += num;
+			}
+		}
+		
+		return total;
 	}
 	
 	private static String createRomanString(int target) 

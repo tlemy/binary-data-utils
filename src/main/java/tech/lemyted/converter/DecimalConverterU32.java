@@ -7,26 +7,26 @@ public class DecimalConverterU32 extends Converter
 	/**
 	 * Converts 32-bit unsigned integers from binary to decimal.
 	 * If the string has more than 32 bits, it will be truncated.
-	 * @param str is the binary string to be converted
+	 * @param target is the binary string to be converted
 	 * @return int as result
 	 * @throws IllegalArgumentException if str is not valid
 	 * */
-	public static long toDecimal(String str) 
+	public static long toDecimal(String target) 
 	{
-		if (!isValid(str)) 
+		if (!isValid(target)) 
 		{
 			throw new IllegalArgumentException("The input is not a valid binary string");
 		}
 		
-		str = padLeft(str, N_BITS);
+		target = padLeft(target, N_BITS);
 		
 		long tot = 0;
-		int indexFirst = str.length() - N_BITS;
-		int indexLast = str.length() - 1;
+		int indexFirst = target.length() - N_BITS;
+		int indexLast = target.length() - 1;
 		
 		for (int i = indexLast; i >= indexFirst; i--) 
 		{
-			if (str.charAt(i) == '1') 
+			if (target.charAt(i) == '1') 
 			{
 				tot += Math.pow(2, indexLast - i);
 			}
@@ -36,11 +36,11 @@ public class DecimalConverterU32 extends Converter
 	
 	/**
 	 * Converts integer from decimal to unsigned 32-bit binary.
-	 * TODO If the integer is bigger than Long.MAX_VALUE, it will be truncated.
-	 * @param num is the integer to convert
+	 * If the integer is bigger than Long.MAX_VALUE, it will be truncated.
+	 * @param target is the integer to convert
 	 * @return String as a result
 	 * */
-	public static String toBinary(long num) 
+	public static String toBinary(long target) 
 	{
 		String str = "";
 		
@@ -48,9 +48,9 @@ public class DecimalConverterU32 extends Converter
 		{
 			double sub = Math.pow(2, i);
 			
-			if (num - sub >= 0) 
+			if (target - sub >= 0) 
 			{
-				num -= sub;
+				target -= sub;
 				str += "1";
 			}
 			else 
