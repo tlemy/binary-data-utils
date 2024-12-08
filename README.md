@@ -1,4 +1,4 @@
-# binary-data-utils
+# data-converter-utils
 > Java Spring boot REST API to convert binary and roman numbers to decimal numbers and vice versa.
 ### Try it out
 ``$ curl backend.lemyted.tech:8081/converter/rom-to-dec?target=CIV``
