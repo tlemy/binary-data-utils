@@ -1,7 +1,6 @@
 # data-converter-utils
 > Java Spring boot REST API to convert binary and roman numbers to decimal numbers and vice versa.
-### Try it out
-``$ curl backend.lemyted.tech:8081/converter/rom-to-dec?target=CIV``
+
 ### Requirements
 	- JDK 21
 	- Maven 3.9.6^
@@ -9,6 +8,8 @@
 ``$ mvn clean install``
 ### Run
 ``$ java -jar ./target/binary-data-utils.jar ``
+### Try it out
+``$ curl localhost:8081/converter/rom-to-dec?target=CIV``
 ### Endpoints
 	- /converter/bin-to-dec-u32?target=
 	- /converter/dec-to-bin-u32?target=
